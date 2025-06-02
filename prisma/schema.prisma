@@ -16,6 +16,16 @@ model Product {
   price Float
   quantity Int
 
+  cartItems CartItem[]
+
   @@map("Products")
+}
+
+model CartItem {
+  id String @id @default(uuid())
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  quantity Int
+  createdAt DateTime @default(now())
 }
 
