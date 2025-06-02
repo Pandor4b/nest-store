@@ -7,6 +7,11 @@ import { UpdateCartItemDTO } from './dtos/update-cart.dto';
 export class CartController {
     constructor(private readonly cartService: CartService) {}
 
+    @Post('checkout')
+    async finalizePurchase() {
+        return this.cartService.finalizePurchase();
+    }
+
     @Post('add')
     async addToCart(@Body() data: AddToCartDTO) {
         return this.cartService.addToCart(data);
@@ -15,6 +20,11 @@ export class CartController {
     @Get()
     getCart() {
         return this.cartService.getCartItems();
+    }
+
+    @Get('history')
+    async getPurchaseHistory() {
+        return this.cartService.getPurchaseHistory();
     }
 
     @Put(':id')

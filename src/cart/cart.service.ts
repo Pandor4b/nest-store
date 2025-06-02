@@ -104,4 +104,63 @@ export class CartService {
     async clearCart() {
         return this.prisma.cartItem.deleteMany();
     }
+
+    async finalizePurchase() {
+        const cartItems = await this.prisma.cartItem.findMany({
+            include: 
+            {
+                product: true,
+            },
+        });
+
+        if (cartItems.length === 0) {
+            throw new BadRequestException('Carrinho vazio.');
+        }
+
+        const total = cartItems.reduce((sum, item) => {
+            return sum + (item.product.price * item.quantity);
+        }, 0);
+
+        const purchase = await this.prisma.purchase.create({
+            data: {
+                total,
+                items: {
+                    create: cartItems.map(item => ({
+                        productId: item.productId,
+                        quantity: item.quantity,
+                        price: item.product.price,
+                    }))
+                }
+            }
+        });
+
+        for (const item of cartItems) {
+            await this.prisma.product.update({
+                data: {
+                    quantity: {
+                        decrement: item.quantity
+                    }
+                },
+                where: {
+                    id: item.productId,
+                },
+            })
+        }
+
+        await this.prisma.cartItem.deleteMany();
+
+        return purchase;
+    }
+
+    async getPurchaseHistory() {
+        return this.prisma.purchase.findMany({
+            include: { 
+                items: true 
+            },
+            orderBy: { 
+                createdAt: 'desc' 
+            },
+        });
+    }
+
 }
