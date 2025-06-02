@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/database/PrismaService';
+import { PrismaService } from '../database/PrismaService';
 import { AddToWishlistDTO } from './dtos/add-wishlist.dto';
 
 @Injectable()
@@ -17,6 +17,7 @@ export class WishlistService {
 
     const exists = await this.prisma.wishlistItem.findFirst({
       where: { productId: data.productId },
+      include: { product: true },
     });
 
     if (exists) return exists;
@@ -25,6 +26,7 @@ export class WishlistService {
       data: {
         productId: data.productId,
       },
+      include: { product: true },
     });
   }
 
@@ -38,6 +40,7 @@ export class WishlistService {
   async remove(wishlistItemId: string) {
     const exists = await this.prisma.wishlistItem.findUnique({
       where: { id: wishlistItemId },
+      include: { product: true },
     });
 
     if (!exists) {
@@ -46,6 +49,7 @@ export class WishlistService {
 
     return this.prisma.wishlistItem.delete({
       where: { id: wishlistItemId },
+      include: { product: true },
     });
   }
 }
