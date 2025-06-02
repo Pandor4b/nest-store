@@ -1,98 +1,144 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Nest Store Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descrição
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este projeto é uma aplicação de e-commerce construída com o framework [NestJS](https://nestjs.com/). Ele utiliza o banco de dados SQLite e Prisma ORM para gerenciar os dados. A aplicação possui funcionalidades como gerenciamento de produtos, carrinho de compras e lista de desejos.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Configuração do Projeto
 
-## Project setup
+### Dependências
 
-```bash
-$ npm install
-```
+Certifique-se de ter as seguintes dependências instaladas:
 
-## Compile and run the project
+- **Node.js** (versão 18 ou superior)
+- **npm** (gerenciador de pacotes do Node.js)
+- **SQLite** (banco de dados utilizado no projeto)
 
-```bash
-# development
-$ npm run start
+### Instalação
 
-# watch mode
-$ npm run start:dev
+1. Clone o repositório:
 
-# production mode
-$ npm run start:prod
-```
+   ```bash
+   git clone https://github.com/Pandor4b/nest-store.git
+   cd nest-store
+   ```
 
-## Run tests
+2. Instale as dependências:
 
-```bash
-# unit tests
-$ npm run test
+   ```bash
+   npm install
+   ```
 
-# e2e tests
-$ npm run test:e2e
+3. Configure o banco de dados SQLite:
 
-# test coverage
-$ npm run test:cov
-```
+   - Certifique-se de que o arquivo `dev.db` está presente na pasta `prisma/`.
+   - Caso contrário, execute as migrações para criar o banco de dados:
+     ```bash
+     npx prisma migrate dev
+     ```
 
-## Deployment
+4. Configure as variáveis de ambiente:
+   - Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+     ```
+     DATABASE_URL="file:./dev.db"
+     ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## Executando a Aplicação
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+### Modos de Execução
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+- **Desenvolvimento**:
 
-## Resources
+  ```bash
+  npm run start:dev
+  ```
 
-Check out a few resources that may come in handy when working with NestJS:
+- **Produção**:
+  ```bash
+  npm run start:prod
+  ```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+A aplicação estará disponível em `http://localhost:3000`.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Testes
 
-## Stay in touch
+### Executar os testes:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Unitários**:
+  ```bash
+  npm run test
+  ```
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Endpoints
+
+### Produtos (`/product`)
+
+- **POST `/product/create`**: Criar um novo produto.
+- **GET `/product`**: Listar todos os produtos.
+- **GET `/product/:id`**: Obter detalhes de um produto pelo ID.
+- **PUT `/product/:id`**: Atualizar um produto pelo ID.
+- **DELETE `/product/:id`**: Excluir um produto pelo ID.
+
+### Carrinho (`/cart`)
+
+- **POST `/cart/add`**: Adicionar um produto ao carrinho.
+- **GET `/cart`**: Listar os itens do carrinho.
+- **PUT `/cart/:id`**: Atualizar a quantidade de um item no carrinho.
+- **DELETE `/cart/:id`**: Remover um item do carrinho.
+- **DELETE `/cart/clear`**: Limpar o carrinho.
+- **POST `/cart/checkout`**: Finalizar a compra.
+- **GET `/cart/history`**: Obter o histórico de compras.
+
+### Lista de Desejos (`/wishlist`)
+
+- **POST `/wishlist/add`**: Adicionar um produto à lista de desejos.
+- **GET `/wishlist`**: Listar os itens da lista de desejos.
+- **DELETE `/wishlist/:id`**: Remover um item da lista de desejos.
+
+---
+
+## Documentação da API
+
+A documentação da API está disponível no Swagger. Para acessá-la, siga os passos abaixo:
+
+1. Inicie a aplicação:
+
+   ```bash
+   npm run start:dev
+   ```
+
+2. Abra o navegador e acesse:
+   ```
+   http://localhost:3000/api
+   ```
+
+A documentação inclui todos os endpoints disponíveis, os parâmetros esperados e exemplos de requisições e respostas.
+
+---
+
+## Estrutura do Projeto
+
+- **`src/`**: Código-fonte da aplicação.
+- **`prisma/`**: Arquivos de configuração e migrações do banco de dados.
+- **`test/`**: Testes end-to-end.
+
+---
+
+## Recursos Adicionais
+
+- [Documentação do NestJS](https://docs.nestjs.com)
+- [Documentação do Prisma](https://www.prisma.io/docs)
+
+---
+
+## Licença
+
+Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
