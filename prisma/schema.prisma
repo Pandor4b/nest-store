@@ -17,6 +17,7 @@ model Product {
 
   cartItems      CartItem[]
   purchasedItems PurchaseItem[]
+  wishlistItems  WishlistItem[]
 
   @@map("Products")
 }
@@ -45,4 +46,12 @@ model PurchaseItem {
 
   purchase Purchase @relation(fields: [purchaseId], references: [id])
   product  Product  @relation(fields: [productId], references: [id])
+}
+
+model WishlistItem {
+  id        String   @id @default(uuid())
+  productId String
+  createdAt DateTime @default(now())
+  
+  product   Product  @relation(fields: [productId], references: [id])
 }
